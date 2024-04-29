@@ -1,34 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Posts from "./pages/posts/posts.jsx";
+import PostDetail from "./pages/postDetail/postDetail.jsx";
+import AddEditPost from "./pages/posts/addEditPost/addEditPost.jsx";
+import Navbar from "./components/navbar/navbar.jsx";
+
+import Home from "./pages/home/home.jsx";
+import React from "react";
+import Users from "./pages/users/users.jsx";
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <main>
+          <Navbar/>
+          <div className="section search-result-wrap">
+              <div className="container">
+                  <BrowserRouter>
+                      <Routes>
+                          <Route path="/" element={<Users/>}/>
+                          <Route path="/user/:userId/posts" element={<Posts/>}/>
+                          <Route path="/post/:postId" element={<PostDetail/>}/>
+                          <Route path="/post/add" element={<AddEditPost/>}/>
+                          <Route path="/post/edit/:postId" element={<AddEditPost/>}/>
+                          {/*<Route path="/albums/:userId" element={<Albums />} />*/}
+                          {/*<Route path="/post/:postId" element={<postDetail />} />*/}
+                          {/*<Route path="/photos/:albumId" element={<Photos />} />*/}
+                          {/*<Route path="/photo/:photoId" element={<PhotoDetail />} />*/}
+                      </Routes>
+                  </BrowserRouter>
+              </div>
+          </div>
+      </main>
   )
 }
 

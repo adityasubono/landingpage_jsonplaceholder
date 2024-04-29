@@ -1,0 +1,11 @@
+.button {
+  border-radius: 0.8rem;
+  padding: 0.2rem 0.8rem;
+  color: var(--headline);
+  background-color: var(--highlight);
+  transition: background 0.5s ease;
+}
+
+.button:hover {
+  background-color: var(--tertiary);
+}
