@@ -8,6 +8,7 @@ import Navbar from "./components/navbar/navbar.jsx";
 import Home from "./pages/home/home.jsx";
 import React from "react";
 import Users from "./pages/users/users.jsx";
+import ListPhoto from "./pages/list-photo/list-photo.jsx";
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
                           <Route path="/" element={<Users/>}/>
                           <Route path="/user/:userId/posts" element={<Posts/>}/>
                           <Route path="/post/:postId" element={<PostDetail/>}/>
-                          <Route path="/post/add" element={<AddEditPost/>}/>
+                          <Route path="/album/:albumId" element={<ListPhoto/>}/>
                           <Route path="/post/edit/:postId" element={<AddEditPost/>}/>
                           {/*<Route path="/albums/:userId" element={<Albums />} />*/}
                           {/*<Route path="/post/:postId" element={<postDetail />} />*/}

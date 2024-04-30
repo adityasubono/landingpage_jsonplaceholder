@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PostsService from "../../service/api/get-posts.js";
 import PostCommentsService from "../../service/api/get-post-comments.js";
+import {FaPen, FaPlus, FaTrash, FaUser} from "react-icons/fa";
 
 const PostDetail = () => {
     const { postId } = useParams();
@@ -24,19 +25,19 @@ const PostDetail = () => {
 
     return (
         <div>
-            <h2>Posts Id {postId}</h2>
+            <h3 className="heading">Post Id: {postId}</h3>
             {post && (
                 <div>
-                    <h2>{post.title}</h2>
+                    <h2 className="text-capitalize">{post.title}</h2>
                     <p>{post.body}</p>
-                    <Comments postId={post.id} />
+                    <Comments postId={post.id}/>
                 </div>
             )}
         </div>
     );
 };
 
-const Comments = ({ postId }) => {
+const Comments = ({postId}) => {
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
@@ -55,14 +56,40 @@ const Comments = ({ postId }) => {
 
     return (
         <div>
-            <h2>Comments Post {postId}</h2>
-        <ul>
-            {comments.map((comment) => (
-                <li key={comment.id}>
-                    <strong>{comment.name}</strong>: {comment.body}
-                </li>
+            <h3 className="heading">Comments Post Id: {postId}</h3>
+
+            <div className='d-flex justify-content-end'>
+                <button className='btn btn-outline-success btn-sm mb-3'>
+                    <FaPlus/> Add Comment
+                </button>
+            </div>
+
+            {comments.map((comment, index) => (
+                <div className='card mb-3' key={index}>
+                    <div className="card-header d-flex justify-content-between">
+                        <div className='text-capitalize fw-bold'>
+                            {comment.name}
+                        </div>
+                        <div className='text-lowercase text-muted'>
+                            {comment.email}
+                        </div>
+                    </div>
+                    <div className="card-body">
+                        <p>{comment.body}</p>
+                        <div></div>
+                    </div>
+
+                    <div className='d-flex justify-content-end gap-3 p-3'>
+                        <button className='btn btn-outline-warning btn-sm'>
+                            <FaPen/>
+                        </button>
+                        <button className='btn btn-outline-danger btn-sm'>
+                            <FaTrash/>
+                        </button>
+                    </div>
+                </div>
             ))}
-        </ul>
+
         </div>
     );
 };

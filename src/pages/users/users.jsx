@@ -10,11 +10,9 @@ export default function Users() {
   const [infoUser, setInfoUser] = useState();
   const [user, setUser] = useState([]);
 
-  // let data = getUsers.read();
-  // let dataPost = getPosts.read();
   const handlerUser = (e) => {
     let userId = e.target.value;
-    let userData = user.find((e) => e.id == userId);
+    let userData = user.find((e) => e.id === userId);
     setTheModalIsOpen(true);
     setInfoUser(userData);
   };
@@ -38,10 +36,7 @@ export default function Users() {
   };
 
   return (
-    <>
-      <header>
-        <h1>Users</h1>
-      </header>
+    <div>
       <article className={styles.listOfNames}>
         <h2 className={styles.title}>List of Users</h2>
         <article className={styles.usersCards}>
@@ -55,13 +50,10 @@ export default function Users() {
               />
           ))}
         </article>
-
-
-
         <Modal theModalIsOpen={theModalIsOpen} buttonFunction={handlerModal}>
           <ListUserInformation userInfo={infoUser}/>
         </Modal>
       </article>
-    </>
+    </div>
   );
 }

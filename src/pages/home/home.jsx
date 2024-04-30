@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PostsService from "../../service/api/get-posts.js";
 import UserService from "../../service/api/get-users.js";
-import AlbumsService from "../../service/api/get-albums.jsx";
+import AlbumsService from "../../service/api/get-albums.js";
 import {Link, useParams} from "react-router-dom";
 import ListUser from "../list-user/list-user.jsx";
 import UserCard from "../../components/user-card/user-card.jsx";
