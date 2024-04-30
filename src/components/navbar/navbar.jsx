@@ -1,6 +1,4 @@
-import React, {Component} from 'react';
-
-export default function Navbar({ text, buttonFunction, ...props }) {
+export default function Navbar() {
         return (
             <div>
                 <nav className="site-nav">
@@ -9,7 +7,7 @@ export default function Navbar({ text, buttonFunction, ...props }) {
                             <div className="site-navigation">
                                 <div className="row g-0 align-items-center">
                                     <div className="col-2">
-                                        <a href="/" className="logo m-0 float-start">Blogy<span
+                                        <a href="/" className="logo m-0 float-start">JSONPlaceholder<span
                                             className="text-primary">.</span></a>
                                     </div>
                                     <div className="col-8 text-center">

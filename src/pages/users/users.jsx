@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Modal from "../../components/modal/modal";
 import UserCard from "../../components/user-card/user-card";
 import ListUserInformation from "../../components/list-user-information/list-user-information";

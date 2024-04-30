@@ -74,8 +74,8 @@ const Comments = ({postId}) => {
             };
 
             setComments(updatedComments);
-            alert("Comment updated successfully");
             resetData()
+            alert("Comment updated successfully");
         } else {
             alert("Comment not found");
         }
@@ -83,17 +83,22 @@ const Comments = ({postId}) => {
 
 
     const saveComment = () => {
-        const newObj = {
-            postId: postId,
-            id: comments.length + 1,
-            name: dataComment.name,
-            email: dataComment.email,
-            body: dataComment.body,
-        };
-        const newArray = [...comments, newObj];
-     alert(JSON.stringify(newObj))
-        setComments(newArray)
-        resetData()
+        try {
+            const newObj = {
+                postId: postId,
+                id: comments.length + 1,
+                name: dataComment.name,
+                email: dataComment.email,
+                body: dataComment.body,
+            };
+            const newArray = [...comments, newObj];
+            // alert(JSON.stringify(newObj))
+            setComments(newArray)
+            resetData()
+            alert('data saved successfully')
+        } catch (error) {
+            alert('data failed to save')
+        }
     };
 
     const handleEdit = (data) => {
@@ -107,11 +112,10 @@ const Comments = ({postId}) => {
     };
     const handleDelete = async (commentId) => {
         try {
-            setComments(comments.filter(comment => comment.id !== commentId));
-            alert('Data Berhasil Dihapus')
+            setComments(comments.filter(comment => comment.id !== commentId))
+            alert('data deleted successfully')
         } catch (error) {
-            console.log(error);
-            alert('Data Gagal Dihapus')
+            alert('data failed to delete')
         }
     };
     const handleInputChange = event => {

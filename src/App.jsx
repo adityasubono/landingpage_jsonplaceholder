@@ -13,26 +13,19 @@ import ListPhoto from "./pages/list-photo/list-photo.jsx";
 
 function App() {
   return (
-      <main>
+      <div>
           <Navbar/>
-          <div className="section search-result-wrap">
               <div className="container">
                   <BrowserRouter>
                       <Routes>
-                          <Route path="/" element={<Users/>}/>
+                          <Route path="/" element={<Home/>}/>
                           <Route path="/user/:userId/posts" element={<Posts/>}/>
                           <Route path="/post/:postId" element={<PostDetail/>}/>
                           <Route path="/album/:albumId" element={<ListPhoto/>}/>
-                          <Route path="/post/edit/:postId" element={<AddEditPost/>}/>
-                          {/*<Route path="/albums/:userId" element={<Albums />} />*/}
-                          {/*<Route path="/post/:postId" element={<postDetail />} />*/}
-                          {/*<Route path="/photos/:albumId" element={<Photos />} />*/}
-                          {/*<Route path="/photo/:photoId" element={<PhotoDetail />} />*/}
                       </Routes>
                   </BrowserRouter>
               </div>
-          </div>
-      </main>
+      </div>
   )
 }
 

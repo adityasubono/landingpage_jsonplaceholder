@@ -45,56 +45,48 @@ const Posts = () => {
     }, [userId]);
 
     const savePost = () => {
-        const data = {
-            id: dataPost.id,
-            title: dataPost.title,
-            body: dataPost.body,
-            userId: dataPost.userId
-        };
-
-        PostsService.addPost(data)
-            .then(response => {
-                setDataPosts({
-                    id: response.data.id,
-                    title: response.data.title,
-                    body: response.data.body,
-                    userId: response.data.userId
-                });
-                console.log(response.data);
-                alert('Data Berhasil Disimpan')
-                setDataPosts(initialPostState)
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        try {
+            const newObj = {
+                userId: userId,
+                id: posts.length + 1,
+                title: dataPost.title,
+                body: dataPost.body,
+            };
+            const newArray = [...posts, newObj];
+            alert(JSON.stringify(newObj))
+            setPosts(newArray)
+            alert('data saved successfully')
+            resetPost()
+        }
+        catch (error) {
+            alert('data failed to save')
+        }
     };
 
     const updatePost = () => {
-        const data = {
-            id: dataPost.id,
-            title: dataPost.title,
-            body: dataPost.body,
-            userId: dataPost.userId
-        };
+        const objIndex = posts.findIndex(obj => obj.id === dataPost.id);
 
-        PostsService.editPost(dataPost.id, data)
-            .then(response => {
-                console.log(response.data);
-                alert('Data  Berhasil Diedit')
-                setDataPosts(initialPostState)
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        if (objIndex !== -1) {
+            const updatedComments = [...posts];
+            updatedComments[objIndex] = {
+                ...updatedComments[objIndex],
+                title: dataPost.title,
+                body: dataPost.body,
+            };
+            setPosts(updatedComments);
+            resetPost()
+            alert("Post updated successfully");
+        } else {
+            alert("Post not found");
+        }
     };
 
     const handleDelete = async (postId) => {
         try {
-            await PostsService.deletePost(postId);
-            alert('Berhasil Dihapus')
             setPosts(posts.filter(post => post.id !== postId));
+            alert('data deleted successfully')
         } catch (error) {
-            console.log(error);
+            alert('data failed to delete')
         }
     };
 
@@ -105,8 +97,6 @@ const Posts = () => {
             body: body,
             userId: userId
         });
-        console.log()
-        // navigate(`/post/edit/${postId}`, { state: { id: postId, title, body, userId } });
     };
 
     const handleInputChange = event => {
