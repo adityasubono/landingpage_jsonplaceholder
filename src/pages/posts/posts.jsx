@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import PostsService from "../../service/api/get-posts.js";
 import UserService from "../../service/api/get-users.js";
+import {FaPen, FaPlus, FaTrash} from "react-icons/fa";
 
 const Posts = () => {
     const { userId } = useParams();
@@ -123,10 +124,11 @@ const Posts = () => {
                 <h3 className="heading">Post List User ID {userId} </h3>
                 <div className="d-flex justify-content-end mb-3">
                     <button type="button"
-                            className="btn btn-success"
+                            className="btn btn-sm btn-outline-success"
                             data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
-                            data-bs-whatever="@mdo">Add New Post
+                            data-bs-whatever="@mdo">
+                        <FaPlus/> New Post
                     </button>
                 </div>
 
@@ -140,16 +142,17 @@ const Posts = () => {
 
                             <div className="">
                                 <button type="button"
-                                        className="btn btn-success me-2"
+                                        className="btn btn-outline-warning btn-sm me-2"
                                         data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
                                         onClick={() => handleEdit(post.id, post.title, post.body, post.userId)}
-                                        data-bs-whatever="@mdo">Edit
+                                        data-bs-whatever="@mdo">
+                                    <FaPen/>
                                 </button>
 
-                                <button className="btn btn-danger"
+                                <button className="btn btn-sm btn-outline-danger"
                                         onClick={() => handleDelete(post.id)}>
-                                    Delete
+                                    <FaTrash/>
                                 </button>
                             </div>
                         </li>
@@ -206,12 +209,14 @@ const Posts = () => {
                             </button>
                             {dataPost.id ? (<button type="button"
                                                     className="btn btn-info text-white"
+                                                    data-bs-target="#exampleModal"
                                                     data-bs-dismiss="modal"
                                                     onClick={updatePost}>Update Post</button>
                             ) : (
                                 <button type="button"
                                         className="btn btn-primary"
                                         data-bs-dismiss="modal"
+                                        data-bs-target="#exampleModal"
                                         onClick={savePost}>Save Post
                                 </button>
                             )}

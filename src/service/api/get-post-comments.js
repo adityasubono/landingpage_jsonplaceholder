@@ -10,6 +10,7 @@ const addPostComments = (postId) => {
 
 const PostCommentsService = {
     getPostComments,
+    addPostComments
 };
 
 export default PostCommentsService;
