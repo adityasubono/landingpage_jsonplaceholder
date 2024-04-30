@@ -1,23 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import PostsService from "../../service/api/get-posts.js";
+import {useEffect, useState} from 'react';
 import UserService from "../../service/api/get-users.js";
-import AlbumsService from "../../service/api/get-albums.js";
-import {Link, useParams} from "react-router-dom";
-import Button from "../../components/button/button.jsx";
-import {FaLocationDot} from "react-icons/fa6";
-
-
+import {Link} from "react-router-dom";
 
 
 function Home() {
     const [user, setUser] = useState([]);
-    const [infoUser, setInfoUser] = useState();
 
-    const handlerUser = (e) => {
-        let userId = e.target.value;
-        let userData = user.find((e) => e.id === userId);
-        setInfoUser(userData);
-    };
     const retrieveUser = async () => {
         UserService.getUsers()
             .then(response => {

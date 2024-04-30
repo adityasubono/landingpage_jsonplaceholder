@@ -37,7 +37,7 @@ const PostDetail = () => {
     );
 };
 
-const Comments = ({postId}) => {
+export const Comments = ({postId}) => {
     const initialComment = {
         postId: null,
         id: null,
@@ -47,14 +47,17 @@ const Comments = ({postId}) => {
     };
     const [comments, setComments] = useState( []);
     const [dataComment, setDataComment] = useState(initialComment)
-    const retrieveComments =  () => {
-        PostCommentsService.getPostComments(postId)
-            .then(response => {
+    const retrieveComments = async () => {
+        try {
+            const response = await PostCommentsService.getPostComments(postId);
+            if (response) {
                 setComments(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
+            } else {
+                console.error('No response received');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     useEffect(() => {
@@ -92,7 +95,6 @@ const Comments = ({postId}) => {
                 body: dataComment.body,
             };
             const newArray = [...comments, newObj];
-            // alert(JSON.stringify(newObj))
             setComments(newArray)
             resetData()
             alert('data saved successfully')
@@ -156,7 +158,7 @@ const Comments = ({postId}) => {
                         <div className="modal-body">
                             <form>
                                 <div className="mb-3">
-                                <label htmlFor="title" className="col-form-label">Name:</label>
+                                <label htmlFor="title" className="col-form-label" aria-labelledby="Name">Name:</label>
                                     <input type="text"
                                            className="form-control"
                                            id="name"
@@ -166,7 +168,7 @@ const Comments = ({postId}) => {
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="email" className="col-form-label">E-mail:</label>
+                                    <label htmlFor="email" className="col-form-label" aria-labelledby="E-mail">E-mail:</label>
                                     <input type="text"
                                            className="form-control"
                                            id="email"
@@ -176,7 +178,7 @@ const Comments = ({postId}) => {
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="body-text" className="col-form-label">Body:</label>
+                                    <label htmlFor="body-text" className="col-form-label" aria-labelledby="Body">Body:</label>
                                     <textarea className="form-control"
                                               name="body"
                                               onChange={handleInputChange}

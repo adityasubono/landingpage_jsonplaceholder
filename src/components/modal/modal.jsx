@@ -12,7 +12,7 @@ export default function Modal({ theModalIsOpen, buttonFunction, children }) {
   };
 
   return (
-    <article className={styles.modal} onClick={modalClosures}>
+    <article className={styles.modal} onClick={modalClosures} data-testid="modal-background">
       <article className={styles.modalContent}>
         {children}
         <Button buttonFunction={buttonFunction} text="Close" />
@@ -24,4 +24,5 @@ export default function Modal({ theModalIsOpen, buttonFunction, children }) {
 Modal.propTypes = {
   theModalIsOpen: PropTypes.bool,
   buttonFunction: PropTypes.func,
+  children: PropTypes.node
 };
