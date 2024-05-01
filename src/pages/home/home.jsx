@@ -40,7 +40,6 @@ function Home() {
                         <h2 className="fw-normal">{dataUser.name}</h2>
                         <p>{dataUser.email}</p>
                         <p>{dataUser.address.street}, {dataUser.address.suite}, {dataUser.address.city}, {dataUser.address.zipcode}</p>
-
                         <button type='button' className='btn btn-secondary text-white' onClick={handlerUser} value={dataUser.id}>Enter&raquo;</button>
                     </div>
                 ))}

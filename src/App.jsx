@@ -6,7 +6,6 @@ import Navbar from "./components/navbar/navbar.jsx";
 import Home from "./pages/home/home.jsx";
 import Profile from "./pages/profile/profile.jsx";
 import Albums from "./pages/albums/albums.jsx";
-import Logout from "./pages/logout/logout.jsx";
 
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
                   <Route path="/landingpage_jsonplaceholder/posts" element={<Posts/>}/>
                   <Route path="/landingpage_jsonplaceholder/post/:postId" element={<PostDetail/>}/>
                   <Route path="/landingpage_jsonplaceholder/albums" element={<Albums/>}/>
-                  <Route path="/landingpage_jsonplaceholder/logout" element={<Logout/>}/>
               </Routes>
           </div>
       </BrowserRouter>
