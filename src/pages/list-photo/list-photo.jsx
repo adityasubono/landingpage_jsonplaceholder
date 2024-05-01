@@ -1,9 +1,8 @@
 import UserService from "../../service/api/get-users.js";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-
-function ListPhoto() {
-    const { albumId } = useParams();
+import PropTypes from "prop-types";
+import Button from "../../components/button/button.jsx";
+function ListPhoto({albumId}) {
     const [dataUserPhoto, setDataUserPhoto] = useState([]);
     const retrievePhoto =  () => {
         UserService.getPhotoUserById(albumId)
@@ -17,11 +16,10 @@ function ListPhoto() {
 
     useEffect(() => {
         retrievePhoto();
-    }, [albumId]);
+    }, []);
 
     return (
         <div>
-            <h3 className="heading">Photo List Album ID {albumId} </h3>
             <div className='row'>
                 {dataUserPhoto.map((photo, index) => (
                     <div className='col-1 mt-2' key={index}>
@@ -62,10 +60,13 @@ function ListPhoto() {
                     </div>
                 ))}
             </div>
-
-
         </div>
     );
 }
 
 export default ListPhoto;
+
+ListPhoto.propTypes = {
+    albumId: PropTypes.string,
+};
+

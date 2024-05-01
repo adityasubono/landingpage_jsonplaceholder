@@ -1,27 +1,49 @@
+import {Link, useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+
 export default function Navbar() {
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        if (userData) {
+            setUser(userData);
+        }
+    }, []);
+
         return (
-            <div>
-                <nav className="site-nav">
-                    <div className="container">
-                        <div className="menu-bg-wrap">
-                            <div className="site-navigation">
-                                <div className="row g-0 align-items-center">
-                                    <div className="col-2">
-                                        <a href="/" className="logo m-0 float-start">JSONPlaceholder<span
-                                            className="text-primary">.</span></a>
-                                    </div>
-                                    <div className="col-8 text-center">
-                                        <form action="#" className="search-form d-inline-block d-lg-none">
-                                            <input type="text" className="form-control" placeholder="Search..."/>
-                                            <span className="bi-search"></span>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-info mb-5">
+                <div className="container">
+                    <a className="navbar-brand text-white fw-bold" href="#">JSONPlaceholder</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item">
+                                <Link className="nav-link " aria-current="page" to="/posts">Post</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link " aria-current="page" to="/albums">Album</Link>
+                            </li>
+                        </ul>
+                        <ul className="navbar-nav">
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                    Hello, {user.name}
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                                    <li><Link className="dropdown-item" to="/">Logout</Link></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         );
 }
 

@@ -1,24 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PostsService from "../../service/api/get-posts.js";
-import UserService from "../../service/api/get-users.js";
 import {FaPen, FaPlus, FaTrash} from "react-icons/fa";
 
 const Posts = () => {
-    const { userId } = useParams();
     const initialPostState = {
         id: null,
         title: "",
         body: "",
-        userId: userId
+        userId: null,
     };
-
+    const userData = JSON.parse(localStorage.getItem('userData'));
     const [posts, setPosts] = useState([]);
     const [dataPost, setDataPosts] = useState(initialPostState);
-    const [dataUserAlbums, setDataUserAlbums] = useState([]);
 
     const retrievePosts =  () => {
-         PostsService.getUserPosts(userId)
+         PostsService.getUserPosts(userData.id)
             .then(response => {
                 setPosts(response.data);
             })
@@ -27,39 +24,22 @@ const Posts = () => {
             });
     };
 
-    const retrieveAlbums =  () => {
-         UserService.getAlbumsUserById(userId)
-            .then(response => {
-                setDataUserAlbums(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    };
-
-
-
-    useEffect(() => {
-        retrievePosts();
-        retrieveAlbums();
-    }, [userId]);
-
     const savePost = () => {
         try {
             const newObj = {
-                userId: userId,
+                userId: userData.id,
                 id: posts.length + 1,
                 title: dataPost.title,
                 body: dataPost.body,
             };
             const newArray = [...posts, newObj];
-            alert(JSON.stringify(newObj))
             setPosts(newArray)
             alert('data saved successfully')
             resetPost()
         }
         catch (error) {
             alert('data failed to save')
+            resetPost()
         }
     };
 
@@ -108,10 +88,14 @@ const Posts = () => {
         setDataPosts(initialPostState);
     };
 
+    useEffect(() => {
+        retrievePosts();
+    }, []);
+
     return (
         <div>
             <div className="sidebar-box">
-                <h3 className="heading">Post List User ID {userId} </h3>
+                <h3 className="heading">Post List </h3>
                 <div className="d-flex justify-content-end mb-3">
                     <button type="button"
                             className="btn btn-sm btn-outline-success"
@@ -122,15 +106,22 @@ const Posts = () => {
                     </button>
                 </div>
 
-                <ul className="categories">
+                <table className="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Body</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {posts.map((post, index) => (
-                        <li className="d-flex justify-content-between" key={index}>
-                            <div className="d-flex">
-                                <p className="me-2">{index + 1}.</p>
-                                <Link className="text-capitalize" to={`/post/${post.id}`}>{post.title}</Link>
-                            </div>
-
-                            <div className="">
+                        <tr key={index}>
+                            <th scope="row">{index + 1}</th>
+                            <td><Link className="text-capitalize" to={`/post/${post.id}`}>{post.title}</Link></td>
+                            <td>{post.body}</td>
+                            <td>
                                 <button type="button"
                                         className="btn btn-outline-warning btn-sm me-2"
                                         data-bs-toggle="modal"
@@ -139,15 +130,15 @@ const Posts = () => {
                                         data-bs-whatever="@mdo">
                                     <FaPen/>
                                 </button>
-
                                 <button className="btn btn-sm btn-outline-danger"
                                         onClick={() => handleDelete(post.id)}>
                                     <FaTrash/>
                                 </button>
-                            </div>
-                        </li>
+                            </td>
+                        </tr>
                     ))}
-                </ul>
+                    </tbody>
+                </table>
             </div>
 
 
@@ -183,6 +174,7 @@ const Posts = () => {
                                 <div className="mb-3">
                                     <label htmlFor="body-text" className="col-form-label">Body:</label>
                                     <textarea className="form-control"
+                                              rows="10"
                                               name="body"
                                               onChange={handleInputChange}
                                               value={dataPost.body}
@@ -214,17 +206,6 @@ const Posts = () => {
                     </div>
                 </div>
             </div>
-
-            <h3 className="heading">Albums List User ID {userId} </h3>
-
-            {dataUserAlbums.map((album, index) => (
-                <li className="d-flex justify-content-between" key={index}>
-                    <div className="d-flex">
-                        <p className="me-2">{index + 1}.</p>
-                        <Link className="text-capitalize" to={`/album/${album.id}`}>{album.title}</Link>
-                    </div>
-                </li>
-            ))}
         </div>
     );
 };
