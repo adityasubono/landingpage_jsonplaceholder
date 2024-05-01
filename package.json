@@ -11,8 +11,7 @@
     "preview": "vite preview",
     "test": "react-scripts test --watchAll --coverage ",
     "eject": "react-scripts eject",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "deploy" : "npm run build && gh-pages -d dist"
   },
   "jest": {
     "coverageThreshold": {

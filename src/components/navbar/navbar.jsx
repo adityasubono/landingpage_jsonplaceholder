@@ -8,7 +8,7 @@ export default function Navbar() {
     const removeUser = () => {
         localStorage.removeItem("userData")
         setUser([]);
-        navigate("/")
+        navigate("/landingpage_jsonplaceholder")
     }
 
     useEffect(() => {
@@ -31,10 +31,10 @@ export default function Navbar() {
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <Link className="nav-link " aria-current="page" to="/posts">Post</Link>
+                                    <Link className="nav-link " aria-current="page" to="/landingpage_jsonplaceholder/posts">Post</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link " aria-current="page" to="/albums">Album</Link>
+                                    <Link className="nav-link " aria-current="page" to="/landingpage_jsonplaceholder/albums">Album</Link>
                                 </li>
                             </ul>
                             <ul className="navbar-nav">
@@ -44,7 +44,7 @@ export default function Navbar() {
                                         Hello, {user.name}
                                     </a>
                                     <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                                        <li><Link className="dropdown-item" to="/landingpage_jsonplaceholder/profile">Profile</Link></li>
                                         <li>
                                             <button type="button"
                                                     className="dropdown-item text-capitalize btn btn-link"

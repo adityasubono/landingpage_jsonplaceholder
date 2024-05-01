@@ -137,7 +137,7 @@ const Posts = () => {
                     {posts.map((post, index) => (
                         <tr key={index}>
                             <th scope="row">{index + 1}</th>
-                            <td><Link className="text-capitalize" to={`/post/${post.id}`}>{post.title}</Link></td>
+                            <td><Link className="text-capitalize" to={`/landingpage_jsonplaceholder/post/${post.id}`}>{post.title}</Link></td>
                             <td>{post.body}</td>
                             <td>
                                 <button type="button"

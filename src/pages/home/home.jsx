@@ -22,7 +22,7 @@ function Home() {
         let userId = e.target.value;
         let userData = user.find((e) => e.id == userId);
         localStorage.setItem('userData', JSON.stringify(userData));
-        navigate("/posts")
+        navigate("/landingpage_jsonplaceholder/posts")
     };
 
     const gender = ["men", "women"];

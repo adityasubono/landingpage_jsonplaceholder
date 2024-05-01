@@ -15,12 +15,12 @@ function App() {
           <Navbar/>
           <div className="container">
               <Routes>
-                  <Route path="/" element={<Home/>}/>
-                  <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/posts" element={<Posts/>}/>
-                  <Route path="/post/:postId" element={<PostDetail/>}/>
-                  <Route path="/albums" element={<Albums/>}/>
-                  <Route path="/logout" element={<Logout/>}/>
+                  <Route path="/landingpage_jsonplaceholder" element={<Home/>}/>
+                  <Route path="/landingpage_jsonplaceholder/profile" element={<Profile/>}/>
+                  <Route path="/landingpage_jsonplaceholder/posts" element={<Posts/>}/>
+                  <Route path="/landingpage_jsonplaceholder/post/:postId" element={<PostDetail/>}/>
+                  <Route path="/landingpage_jsonplaceholder/albums" element={<Albums/>}/>
+                  <Route path="/landingpage_jsonplaceholder/logout" element={<Logout/>}/>
               </Routes>
           </div>
       </BrowserRouter>
