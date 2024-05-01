@@ -4,12 +4,16 @@ import PropTypes from "prop-types";
 import Button from "../../components/button/button.jsx";
 function ListPhoto({albumId}) {
     const [dataUserPhoto, setDataUserPhoto] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const retrievePhoto =  () => {
+        setIsLoading(true)
         UserService.getPhotoUserById(albumId)
             .then(response => {
+                setIsLoading(false)
                 setDataUserPhoto(response.data);
             })
             .catch(e => {
+                setIsLoading(true)
                 console.log(e);
             });
     };
@@ -21,6 +25,21 @@ function ListPhoto({albumId}) {
     return (
         <div>
             <div className='row'>
+
+                {isLoading && (
+                    <div>
+                        <p className="placeholder-glow">
+                            <span className="placeholder col-12"></span>
+                        </p>
+
+                        <p className="placeholder-glow">
+                            <span className="placeholder col-12"></span>
+                        </p>
+                        <p className="placeholder-glow">
+                            <span className="placeholder col-12"></span>
+                        </p>
+                    </div>
+                )}
                 {dataUserPhoto.map((photo, index) => (
                     <div className='col-1 mt-2' key={index}>
                         <img src={photo.thumbnailUrl}

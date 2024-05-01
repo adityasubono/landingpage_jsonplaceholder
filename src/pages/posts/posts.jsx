@@ -13,13 +13,16 @@ const Posts = () => {
     const userData = JSON.parse(localStorage.getItem('userData'));
     const [posts, setPosts] = useState([]);
     const [dataPost, setDataPosts] = useState(initialPostState);
-
+    const [isLoading, setIsLoading] = useState(false);
     const retrievePosts =  () => {
+        setIsLoading(true)
          PostsService.getUserPosts(userData.id)
             .then(response => {
+                setIsLoading(false)
                 setPosts(response.data);
             })
             .catch(e => {
+                setIsLoading(true)
                 console.log(e);
             });
     };
@@ -105,6 +108,21 @@ const Posts = () => {
                         <FaPlus/> New Post
                     </button>
                 </div>
+                {isLoading && (
+                    <div>
+                        <p className="placeholder-glow">
+                            <span className="placeholder col-12"></span>
+                        </p>
+
+                        <p className="placeholder-glow">
+                            <span className="placeholder col-12"></span>
+                        </p>
+                        <p className="placeholder-glow">
+                            <span className="placeholder col-12"></span>
+                        </p>
+                    </div>
+                )}
+
 
                 <table className="table table-striped table-hover">
                     <thead>
