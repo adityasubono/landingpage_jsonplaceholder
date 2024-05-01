@@ -4,9 +4,9 @@ import Posts from "./pages/posts/posts.jsx";
 import PostDetail from "./pages/postDetail/postDetail.jsx";
 import Navbar from "./components/navbar/navbar.jsx";
 import Home from "./pages/home/home.jsx";
-import ListPhoto from "./pages/list-photo/list-photo.jsx";
 import Profile from "./pages/profile/profile.jsx";
 import Albums from "./pages/albums/albums.jsx";
+import Logout from "./pages/logout/logout.jsx";
 
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
                   <Route path="/posts" element={<Posts/>}/>
                   <Route path="/post/:postId" element={<PostDetail/>}/>
                   <Route path="/albums" element={<Albums/>}/>
+                  <Route path="/logout" element={<Logout/>}/>
               </Routes>
           </div>
       </BrowserRouter>

@@ -1,4 +1,3 @@
-import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 function Profile() {
@@ -29,8 +28,8 @@ function Profile() {
                             <li className="list-group-item">Phone : {user.email}</li>
                             <li className="list-group-item">Username : {user.email}</li>
                             <li className="list-group-item">Website : {user.email}</li>
-                            <li className="list-group-item">Address : {user.address.street}, {user.address.suite}, {user.address.city} {user.address.zipcode}</li>
-                            <li className="list-group-item">Company : {user.company.name}</li>
+                            <li className="list-group-item">Address : {user.address?.street}, {user.address?.suite}, {user.address?.city} {user.address?.zipcode}</li>
+                            <li className="list-group-item">Company : {user.company?.name}</li>
                         </ul>
                     </div>
                 </div>

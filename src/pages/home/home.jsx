@@ -9,7 +9,6 @@ function Home() {
         UserService.getUsers()
             .then(response => {
                 setUser(response.data);
-                console.log(response.data);
             })
             .catch(e => {
                 console.log(e);

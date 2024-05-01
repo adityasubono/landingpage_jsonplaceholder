@@ -1,11 +1,17 @@
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 export default function Navbar() {
     const [user, setUser] = useState([]);
+    const navigate = useNavigate()
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const removeUser = () => {
+        localStorage.removeItem("userData")
+        setUser([]);
+        navigate("/")
+    }
 
     useEffect(() => {
-        const userData = JSON.parse(localStorage.getItem('userData'));
         if (userData) {
             setUser(userData);
         }
@@ -20,28 +26,38 @@ export default function Navbar() {
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-item">
-                                <Link className="nav-link " aria-current="page" to="/posts">Post</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link " aria-current="page" to="/albums">Album</Link>
-                            </li>
-                        </ul>
-                        <ul className="navbar-nav">
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    Hello, {user.name}
-                                </a>
-                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
-                                    <li><Link className="dropdown-item" to="/">Logout</Link></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+
+                    {user.id && (
+                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <Link className="nav-link " aria-current="page" to="/posts">Post</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link " aria-current="page" to="/albums">Album</Link>
+                                </li>
+                            </ul>
+                            <ul className="navbar-nav">
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                        Hello, {user.name}
+                                    </a>
+                                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                                        <li>
+                                            <button type="button"
+                                                    className="dropdown-item text-capitalize btn btn-link"
+                                                    onClick={removeUser}
+                                            >Logout
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+
                 </div>
             </nav>
         );
