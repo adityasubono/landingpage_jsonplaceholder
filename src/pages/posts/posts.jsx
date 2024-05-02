@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PostsService from "../../service/api/get-posts.js";
 import {FaPen, FaPlus, FaTrash} from "react-icons/fa";
+import Button from "../../components/button/button.jsx";
+import Title from "../../components/title/title.jsx";
 
 const Posts = () => {
     const initialPostState = {
@@ -97,67 +99,67 @@ const Posts = () => {
 
     return (
         <div>
-            <div className="sidebar-box">
-                <h3 className="heading">Post List </h3>
-                <div className="d-flex justify-content-end mb-3">
-                    <button type="button"
-                            className="btn btn-sm btn-outline-success"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
-                            data-bs-whatever="@mdo">
-                        <FaPlus/> New Post
-                    </button>
+            <Title title={'Post List'}/>
+            <div className="d-flex justify-content-end mb-3">
+                <Button type="button"
+                        className="btn btn-sm btn-outline-success"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdo">
+                    <FaPlus/> New Post
+                </Button>
+            </div>
+            {isLoading && (
+                <div>
+                    <p className="placeholder-glow">
+                        <span className="placeholder col-12"></span>
+                    </p>
+
+                    <p className="placeholder-glow">
+                        <span className="placeholder col-12"></span>
+                    </p>
+                    <p className="placeholder-glow">
+                        <span className="placeholder col-12"></span>
+                    </p>
                 </div>
-                {isLoading && (
-                    <div>
-                        <p className="placeholder-glow">
-                            <span className="placeholder col-12"></span>
-                        </p>
-
-                        <p className="placeholder-glow">
-                            <span className="placeholder col-12"></span>
-                        </p>
-                        <p className="placeholder-glow">
-                            <span className="placeholder col-12"></span>
-                        </p>
-                    </div>
-                )}
+            )}
 
 
-                <table className="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Body</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {posts.map((post, index) => (
-                        <tr key={index}>
-                            <th scope="row">{index + 1}</th>
-                            <td><Link className="text-capitalize" to={`/landingpage_jsonplaceholder/post/${post.id}`}>{post.title}</Link></td>
-                            <td>{post.body}</td>
-                            <td>
-                                <button type="button"
+            <table className="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col-2" className='bg-dark text-white'>#</th>
+                    <th scope="col-2" className='bg-dark text-white'>Title</th>
+                    <th scope="col-2" className='bg-dark text-white'>Body</th>
+                    <th scope="col-2" className='bg-dark text-white'>Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+                {posts.map((post, index) => (
+                    <tr key={index}>
+                        <th scope="row">{index + 1}</th>
+                        <td><Link className="text-capitalize" to={`/landingpage_jsonplaceholder/post/${post.id}`}>{post.title}</Link></td>
+                        <td>{post.body}</td>
+                        <td>
+                            <div className='d-flex flex-row'>
+                                <Button type="button"
                                         className="btn btn-outline-warning btn-sm me-2"
                                         data-bs-toggle="modal"
                                         data-bs-target="#exampleModal"
-                                        onClick={() => handleEdit(post.id, post.title, post.body, post.userId)}
+                                        buttonFunction={() => handleEdit(post.id, post.title, post.body, post.userId)}
                                         data-bs-whatever="@mdo">
                                     <FaPen/>
-                                </button>
-                                <button className="btn btn-sm btn-outline-danger"
-                                        onClick={() => handleDelete(post.id)}>
+                                </Button>
+                                <Button className="btn btn-sm btn-outline-danger"
+                                        buttonFunction={() => handleDelete(post.id)}>
                                     <FaTrash/>
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
+                                </Button>
+                            </div>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
 
 
             <div className="modal fade"
@@ -202,23 +204,23 @@ const Posts = () => {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button"
+                            <Button type="button"
                                     className="btn btn-secondary"
-                                    onClick={resetPost}
+                                    buttonFunction={resetPost}
                                     data-bs-dismiss="modal">Close
-                            </button>
-                            {dataPost.id ? (<button type="button"
+                            </Button>
+                            {dataPost.id ? (<Button type="button"
                                                     className="btn btn-info text-white"
                                                     data-bs-target="#exampleModal"
                                                     data-bs-dismiss="modal"
-                                                    onClick={updatePost}>Update Post</button>
+                                                    buttonFunction={updatePost}>Update Post</Button>
                             ) : (
-                                <button type="button"
+                                <Button type="button"
                                         className="btn btn-primary"
                                         data-bs-dismiss="modal"
                                         data-bs-target="#exampleModal"
                                         onClick={savePost}>Save Post
-                                </button>
+                                </Button>
                             )}
                         </div>
                     </div>

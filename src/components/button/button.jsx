@@ -1,15 +1,15 @@
-import styles from "./button.module.css";
 import PropTypes from "prop-types";
 
-export default function Button({ text, buttonFunction, ...props }) {
+export default function Button({className, buttonFunction, children, ...props }) {
   return (
-    <button className={styles.button} onClick={buttonFunction} {...props}>
-      {text}
-    </button>
-  );
+      <button className={className} onClick={buttonFunction} {...props}>
+        {children}
+      </button>
+  )
 }
 
 Button.propTypes = {
-  text: PropTypes.string,
+  className: PropTypes.string.isRequired,
+  children: PropTypes.element,
   buttonFunction: PropTypes.func,
 };

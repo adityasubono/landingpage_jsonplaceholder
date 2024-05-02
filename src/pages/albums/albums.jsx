@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import UserService from "../../service/api/get-users.js";
 import {useEffect, useState} from "react";
 import ListPhoto from "../list-photo/list-photo.jsx";
+import Title from "../../components/title/title.jsx";
 
 function Albums() {
     const userData = JSON.parse(localStorage.getItem('userData'));
@@ -21,8 +22,8 @@ function Albums() {
     }, []);
 
     return (
-        <div className="sidebar-box">
-            <h3 className="heading">Albums List </h3>
+        <div>
+            <Title title={'Album List'}/>
             <ol className="list-group list-group-numbered">
             {dataUserAlbums.map((album, index) => (
                 <li className="list-group-item d-flex justify-content-between align-items-start" key={index}>

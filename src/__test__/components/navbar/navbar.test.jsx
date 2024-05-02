@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import { shallow } from 'enzyme';
-import Navbar from "../../../components/navbar/navbar.jsx";
+import Navbar from "../../../pages/navbar/navbar.jsx";
 
 describe('Navbar Component', () => {
     let wrapper;

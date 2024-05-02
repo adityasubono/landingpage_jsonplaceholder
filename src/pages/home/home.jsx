@@ -2,7 +2,11 @@ import {useEffect, useState} from 'react';
 import UserService from "../../service/api/get-users.js";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
-import Navbar from "../../components/navbar/navbar.jsx";
+import Navbar from "../navbar/navbar.jsx";
+import Button from "../../components/button/button.jsx";
+import {FaDoorOpen} from "react-icons/fa";
+import Title from "../../components/title/title.jsx";
+import Card from "../../components/card/card.jsx";
 
 // eslint-disable-next-line react/prop-types
 function Home({onMessage}) {
@@ -17,9 +21,6 @@ function Home({onMessage}) {
                 console.log(e);
             });
     };
-    useEffect(() => {
-        retrieveUser();
-    }, []);
 
     const handlerUser = (e) => {
         let userId = e.target.value;
@@ -29,22 +30,30 @@ function Home({onMessage}) {
         return onMessage(userData)
     };
 
+    useEffect(() => {
+        retrieveUser();
+    }, []);
+
     const gender = ["men", "women"];
     return (
         <div>
-            <h3 className="text-center mt-5">List User</h3>
+            <Title title={'List User'}/>
+
             <div className="row">
                 {user.map((dataUser, index) => (
                     <div className="col-lg-4 text-center mt-5" key={index}>
-                        <img
-                            src={`https://randomuser.me/api/portraits/${gender[Math.round(Math.random() * 1)]}/${Math.round(Math.random() * 99)}.jpg`}
-                            alt="Image"
-                            className="img-fluid w-25 rounded-circle mb-3"
-                        />
-                        <h2 className="fw-normal">{dataUser.name}</h2>
-                        <p>{dataUser.email}</p>
-                        <p>{dataUser.address.street}, {dataUser.address.suite}, {dataUser.address.city}, {dataUser.address.zipcode}</p>
-                        <button type='button' className='btn btn-secondary text-white' onClick={handlerUser} value={dataUser.id}>Enter&raquo;</button>
+                        <Card image={`https://randomuser.me/api/portraits/${gender[Math.round(Math.random() * 1)]}/${Math.round(Math.random() * 99)}.jpg`}
+                              name={dataUser.name}
+                              email={dataUser.email}
+                              phone={dataUser.phone}
+                        >
+                            <Button className={'btn btn-secondary text-white'}
+                                    buttonFunction={handlerUser}
+                                    value={dataUser.id}
+                            >
+                                Enter  <FaDoorOpen/>
+                            </Button>
+                        </Card>
                     </div>
                 ))}
             </div>

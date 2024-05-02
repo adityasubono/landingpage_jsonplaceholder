@@ -1,4 +1,4 @@
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 function Navbar({data}) {
@@ -26,8 +26,7 @@ function Navbar({data}) {
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    {/*{JSON.stringify(user)}*/}
-                    {user.id && (
+                    {user?.id && (
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
@@ -63,7 +62,7 @@ function Navbar({data}) {
 }
 
 Navbar.propTypes = {
-    data: PropTypes.array,
+    data: PropTypes.arrayOf(Object).isRequired
 };
 
 export default Navbar

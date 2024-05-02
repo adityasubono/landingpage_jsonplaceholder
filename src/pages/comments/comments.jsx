@@ -2,6 +2,7 @@ import {FaPen, FaPlus, FaTrash} from "react-icons/fa";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 import PostCommentsService from "../../service/api/get-post-comments.js";
+import Button from "../../components/button/button.jsx";
 
 function Comments({postId}) {
     const initialComment = {
@@ -126,11 +127,11 @@ function Comments({postId}) {
             )}
 
             <div className='d-flex justify-content-end'>
-                <button type="button" className="btn btn-outline-success btn-sm mb-3"
+                <Button type="button" className="btn btn-outline-success btn-sm mb-3"
                         data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                     <FaPlus/> New Comment
-                </button>
+                </Button>
             </div>
 
             <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -186,27 +187,27 @@ function Comments({postId}) {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button"
+                            <Button type="button"
                                     className="btn btn-secondary"
-                                    onClick={resetData}
+                                    buttonFunction={resetData}
                                     data-bs-dismiss="modal">Close
-                            </button>
+                            </Button>
 
                             {dataComment.id ? (
-                                <button type="button"
+                                <Button type="button"
                                         className="btn btn-info text-white"
                                         data-bs-dismiss="modal"
                                         data-bs-target="#exampleModal"
-                                        onClick={updateComment}>
+                                        buttonFunction={updateComment}>
                                     Edit
-                                </button>
+                                </Button>
                             ) : (
-                                <button type="button"
+                                <Button type="button"
                                         className="btn btn-success"
                                         data-bs-dismiss="modal"
                                         data-bs-target="#exampleModal"
-                                        onClick={saveComment}>Save
-                                </button>
+                                        buttonFunction={saveComment}>Save
+                                </Button>
                             )}
                         </div>
                     </div>
@@ -235,18 +236,18 @@ function Comments({postId}) {
                     </div>
 
                     <div className='d-flex justify-content-end gap-3 p-3'>
-                        <button className='btn btn-outline-warning btn-sm'
+                        <Button className='btn btn-outline-warning btn-sm'
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop"
-                                onClick={() => handleEdit(comment)}
+                                buttonFunction={() => handleEdit(comment)}
                         >
                             <FaPen/>
-                        </button>
-                        <button className='btn btn-outline-danger btn-sm'
-                                onClick={() => handleDelete(comment.id)}
+                        </Button>
+                        <Button className='btn btn-outline-danger btn-sm'
+                                buttonFunction={() => handleDelete(comment.id)}
                         >
                             <FaTrash/>
-                        </button>
+                        </Button>
                     </div>
                 </div>
             ))}
