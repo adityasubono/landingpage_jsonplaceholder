@@ -6,15 +6,19 @@ import Navbar from "./components/navbar/navbar.jsx";
 import Home from "./pages/home/home.jsx";
 import Profile from "./pages/profile/profile.jsx";
 import Albums from "./pages/albums/albums.jsx";
-
+import {useState} from "react";
 
 function App() {
+    const [data, setData] = useState([]);
+    const handlerUser = (data) => {
+        setData(data)
+    };
   return (
       <BrowserRouter>
-          <Navbar/>
+          <Navbar data={data}/>
           <div className="container">
               <Routes>
-                  <Route path="/landingpage_jsonplaceholder" element={<Home/>}/>
+                  <Route path="/landingpage_jsonplaceholder" element={<Home onMessage={handlerUser}/>}/>
                   <Route path="/landingpage_jsonplaceholder/profile" element={<Profile/>}/>
                   <Route path="/landingpage_jsonplaceholder/posts" element={<Posts/>}/>
                   <Route path="/landingpage_jsonplaceholder/post/:postId" element={<PostDetail/>}/>
@@ -25,5 +29,4 @@ function App() {
 
   )
 }
-
 export default App

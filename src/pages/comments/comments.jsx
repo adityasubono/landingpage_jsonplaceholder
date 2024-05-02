@@ -16,21 +16,18 @@ function Comments({postId}) {
     const [isLoading, setIsLoading] = useState(false);
     const [comments, setComments] = useState( []);
     const [dataComment, setDataComment] = useState(initialComment);
-    const retrieveComments = async () => {
+    const retrieveComments = async (postId) => {
         setIsLoading(true)
-        PostCommentsService.getPostComments(postId)
+        await PostCommentsService.getPostComments(postId)
             .then(response => {
                 setIsLoading(false)
                 setComments(response.data);
             }).catch(e => {
             setIsLoading(true)
                 console.log(e)
+                setIsLoading(true)
             });
     };
-
-    useEffect(() => {
-        retrieveComments();
-    }, [postId]);
 
     const updateComment = () => {
         const objIndex = comments.findIndex(obj => obj.id === dataComment.id);
@@ -50,8 +47,6 @@ function Comments({postId}) {
             alert("Comment not found");
         }
     };
-
-
     const saveComment = () => {
         try {
             const newObj = {
@@ -96,10 +91,13 @@ function Comments({postId}) {
         setDataComment(initialComment)
     }
 
+    useEffect(() => {
+        retrieveComments(postId);
+    }, [postId]);
 
     return (
         <div>
-            <h3 className="heading">Comments Post</h3>
+            <h3 className="heading">Comments Post {postId}</h3>
             {isLoading && (
                 <div className="card" aria-hidden="true">
                     <div className='card-header'>
@@ -258,7 +256,7 @@ function Comments({postId}) {
 }
 
 Comments.propTypes = {
-    postId: PropTypes.number.isRequired,
+    postId: PropTypes.number,
 };
 
 export default Comments;

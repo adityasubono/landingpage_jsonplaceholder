@@ -1,10 +1,11 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-
-export default function Navbar() {
+import PropTypes from "prop-types";
+function Navbar({data}) {
+    const userData = JSON.parse(localStorage.getItem('userData'));
     const [user, setUser] = useState([]);
     const navigate = useNavigate()
-    const userData = JSON.parse(localStorage.getItem('userData'));
+
     const removeUser = () => {
         localStorage.removeItem("userData")
         setUser([]);
@@ -12,10 +13,8 @@ export default function Navbar() {
     }
 
     useEffect(() => {
-        if (userData) {
-            setUser(userData);
-        }
-    }, []);
+        setUser(userData)
+    }, [data]);
 
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-info mb-5">
@@ -27,6 +26,7 @@ export default function Navbar() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
+                    {/*{JSON.stringify(user)}*/}
                     {user.id && (
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -57,9 +57,14 @@ export default function Navbar() {
                             </ul>
                         </div>
                     )}
-
                 </div>
             </nav>
         );
 }
+
+Navbar.propTypes = {
+    data: PropTypes.array,
+};
+
+export default Navbar
 

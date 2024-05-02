@@ -86,6 +86,6 @@ function ListPhoto({albumId}) {
 export default ListPhoto;
 
 ListPhoto.propTypes = {
-    albumId: PropTypes.string,
+    albumId: PropTypes.number,
 };
 

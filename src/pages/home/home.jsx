@@ -1,8 +1,11 @@
 import {useEffect, useState} from 'react';
 import UserService from "../../service/api/get-users.js";
 import {useNavigate} from "react-router-dom";
+import PropTypes from "prop-types";
+import Navbar from "../../components/navbar/navbar.jsx";
 
-function Home() {
+// eslint-disable-next-line react/prop-types
+function Home({onMessage}) {
     const [user, setUser] = useState([]);
     const navigate = useNavigate()
     const retrieveUser =  () => {
@@ -23,6 +26,7 @@ function Home() {
         let userData = user.find((e) => e.id == userId);
         localStorage.setItem('userData', JSON.stringify(userData));
         navigate("/landingpage_jsonplaceholder/posts")
+        return onMessage(userData)
     };
 
     const gender = ["men", "women"];
