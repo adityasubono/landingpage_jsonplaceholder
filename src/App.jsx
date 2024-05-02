@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Posts from "./pages/posts/posts.jsx";
-import PostDetail from "./pages/postDetail/postDetail.jsx";
+import PostDetail from "./pages/post-detail/postDetail.jsx";
 import Navbar from "./pages/navbar/navbar.jsx";
 import Home from "./pages/home/home.jsx";
 import Profile from "./pages/profile/profile.jsx";

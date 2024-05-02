@@ -2,6 +2,7 @@ import UserService from "../../service/api/get-users.js";
 import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import Button from "../../components/button/button.jsx";
+import SkeletonCard from "../../components/skeleton/skeleton-card.jsx";
 function ListPhoto({albumId}) {
     const [dataUserPhoto, setDataUserPhoto] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -26,20 +27,7 @@ function ListPhoto({albumId}) {
         <div>
             <div className='row'>
 
-                {isLoading && (
-                    <div>
-                        <p className="placeholder-glow">
-                            <span className="placeholder col-12"></span>
-                        </p>
-
-                        <p className="placeholder-glow">
-                            <span className="placeholder col-12"></span>
-                        </p>
-                        <p className="placeholder-glow">
-                            <span className="placeholder col-12"></span>
-                        </p>
-                    </div>
-                )}
+                {isLoading && (<SkeletonCard/>)}
                 {dataUserPhoto.map((photo, index) => (
                     <div className='col-1 mt-2' key={index}>
                         <img src={photo.thumbnailUrl}

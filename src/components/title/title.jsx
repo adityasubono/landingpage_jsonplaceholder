@@ -3,7 +3,7 @@ import {FaUser, FaUserAlt} from "react-icons/fa";
 function Title({title, subTitle}) {
     return (
         <div>
-            <div className="d-flex flex-column border-bottom">
+            <div className="d-flex flex-column border-bottom mb-3">
                 <div className="fs-3">{title}</div>
                 <div className="fs-4">{subTitle}</div>
             </div>

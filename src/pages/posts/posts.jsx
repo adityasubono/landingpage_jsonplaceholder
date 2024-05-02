@@ -4,6 +4,7 @@ import PostsService from "../../service/api/get-posts.js";
 import {FaPen, FaPlus, FaTrash} from "react-icons/fa";
 import Button from "../../components/button/button.jsx";
 import Title from "../../components/title/title.jsx";
+import SkeletonCard from "../../components/skeleton/skeleton-card.jsx";
 
 const Posts = () => {
     const initialPostState = {
@@ -109,20 +110,7 @@ const Posts = () => {
                     <FaPlus/> New Post
                 </Button>
             </div>
-            {isLoading && (
-                <div>
-                    <p className="placeholder-glow">
-                        <span className="placeholder col-12"></span>
-                    </p>
-
-                    <p className="placeholder-glow">
-                        <span className="placeholder col-12"></span>
-                    </p>
-                    <p className="placeholder-glow">
-                        <span className="placeholder col-12"></span>
-                    </p>
-                </div>
-            )}
+            {isLoading && (<SkeletonCard/>)}
 
 
             <table className="table table-striped table-hover">

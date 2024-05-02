@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'; // For DOM assertions
-import { Comments } from '../../../pages/postDetail/postDetail.jsx';
+import { Comments } from '../../../pages/post-detail/postDetail.jsx';
 import PostCommentsService from "../../../service/api/get-post-comments.js";
 
 // Mocking the service APIs

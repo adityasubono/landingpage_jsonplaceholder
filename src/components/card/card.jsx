@@ -7,9 +7,9 @@ function Card({image, name, phone, email, children}) {
                 <img alt="" src={image} className="img-fluid w-25 rounded-circle mb-3"/>
             </div>
             <div className="d-flex flex-column">
-                <div className='fs-4'>{name}</div>
-                <div className='fs-5'>{email}</div>
-                <div className='fs-5'>{phone}</div>
+                <div className='fs-4 text-info fw-bold'>{name}</div>
+                <div className='fs-5 text-muted text-lowercase'>{email}</div>
+                <div className='fs-5 text-muted'>{phone}</div>
             </div>
             {children}
         </div>

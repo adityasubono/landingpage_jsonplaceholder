@@ -17,7 +17,7 @@ function Navbar({data}) {
     }, [data]);
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-info mb-5">
+            <nav className="navbar navbar-expand-lg navbar-light bg-info mb-5 sticky-top">
                 <div className="container">
                     <a className="navbar-brand text-white fw-bold" href="#">JSONPlaceholder</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"

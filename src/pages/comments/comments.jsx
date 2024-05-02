@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 import PostCommentsService from "../../service/api/get-post-comments.js";
 import Button from "../../components/button/button.jsx";
+import SkeletonCard from "../../components/skeleton/skeleton-card.jsx";
 
 function Comments({postId}) {
     const initialComment = {
@@ -99,32 +100,7 @@ function Comments({postId}) {
     return (
         <div>
             <h3 className="heading">Comments Post {postId}</h3>
-            {isLoading && (
-                <div className="card" aria-hidden="true">
-                    <div className='card-header'>
-                        <p className="card-text placeholder-glow d-flex justify-content-between">
-                            <span className="placeholder col-3"></span>
-                            <span className="placeholder col-3"></span>
-                        </p>
-                    </div>
-                    <div className="card-body">
-                        <h5 className="card-title placeholder-glow">
-                            <span className="placeholder col-6"></span>
-                        </h5>
-                        <p className="card-text placeholder-glow">
-                            <span className="placeholder col-7"></span>
-                            <span className="placeholder col-4"></span>
-                            <span className="placeholder col-4"></span>
-                            <span className="placeholder col-6"></span>
-                            <span className="placeholder col-8"></span>
-                        </p>
-                        <div className='d-flex justify-content-end gap-3'>
-                            <a href="#" tabIndex="-1" className="btn btn-warning disabled placeholder col-1"></a>
-                            <a href="#" tabIndex="-1" className="btn btn-danger disabled placeholder col-1"></a>
-                        </div>
-                    </div>
-                </div>
-            )}
+            {isLoading && (<SkeletonCard/>)}
 
             <div className='d-flex justify-content-end'>
                 <Button type="button" className="btn btn-outline-success btn-sm mb-3"

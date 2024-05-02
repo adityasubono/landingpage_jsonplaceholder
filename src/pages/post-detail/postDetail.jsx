@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PostsService from "../../service/api/get-posts.js";
 import Comments from "../comments/comments.jsx";
+import SkeletonCard from "../../components/skeleton/skeleton-card.jsx";
 
 const PostDetail = () => {
     const { postId } = useParams();
@@ -29,20 +30,7 @@ const PostDetail = () => {
 
             <h3 className="heading">Detail Post</h3>
 
-            {isLoading && (
-                <div>
-                    <p aria-hidden="true">
-                        <span className="placeholder col-3"></span>
-                    </p>
-                    <p aria-hidden="true">
-                        <span className="placeholder col-7"></span>
-                    </p>
-                    <p aria-hidden="true">
-                        <span className="placeholder col-7"></span>
-                    </p>
-                </div>
-            )}
-
+            {isLoading && (<SkeletonCard/>)}
 
             <div>
                 <h2 className="text-capitalize">{post.title}</h2>
